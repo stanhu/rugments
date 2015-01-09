@@ -37,7 +37,7 @@ module Rugments
 
       state :object_key do
         mixin :whitespace
-        mixin :has_string
+        rule /"(\\\\|\\"|[^"])*"/, Name::Tag
         rule /:/, Punctuation, :object_val
         rule /}/, Error, :pop!
       end
