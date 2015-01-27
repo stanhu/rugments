@@ -149,8 +149,8 @@ module Rugments
       end
 
       state :css do
-        rule(/\.\w+/) { token Name::Class; goto :tag }
-        rule(/#\w+/) { token Name::Function; goto :tag }
+        rule(/\.-?[_a-zA-Z]+[\w-]*/) { token Name::Class; goto :tag }
+        rule(/#[a-zA-Z]+[\w-:.]*/) { token Name::Function; goto :tag }
       end
 
       state :html_attr do
