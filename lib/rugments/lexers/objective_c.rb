@@ -77,6 +77,7 @@ module Rugments
 
         rule /[?]/, Punctuation, :ternary
         rule /\[/,  Punctuation, :message
+        rule /@\[/, Punctuation, :array_literal
       end
 
       state :ternary do
@@ -111,6 +112,12 @@ module Rugments
         end
 
         mixin :message_shared
+      end
+
+      state :array_literal do
+        rule /]/, Punctuation, :pop!
+        rule /,/, Punctuation
+        mixin :statements
       end
 
       state :classname do
