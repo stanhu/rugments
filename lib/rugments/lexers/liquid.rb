@@ -103,7 +103,7 @@ module Rugments
       state :filters do
         mixin :whitespace
 
-        rule (/\}\}/) { token Punctuation; reset_stack }
+        rule(/\}\}/) { token Punctuation; reset_stack }
 
         rule /([^\s\|:]+)(:?)(\s*)/ do
           groups Name::Function, Punctuation, Text::Whitespace
@@ -156,11 +156,11 @@ module Rugments
       end
 
       state :end_of_tag do
-        rule (/\}\}/) { token Punctuation; reset_stack }
+        rule(/\}\}/) { token Punctuation; reset_stack }
       end
 
       state :end_of_block do
-        rule (/%\}/) { token Punctuation; reset_stack }
+        rule(/%\}/) { token Punctuation; reset_stack }
       end
 
       # states for unknown markup
@@ -194,12 +194,12 @@ module Rugments
       end
 
       state :tag_markup do
-        rule (/%\}/) { token Punctuation; reset_stack }
+        rule(/%\}/) { token Punctuation; reset_stack }
         mixin :default_param_markup
       end
 
       state :variable_tag_markup do
-        rule (/%\}/) { token Punctuation; reset_stack }
+        rule(/%\}/) { token Punctuation; reset_stack }
         mixin :variable_param_markup
       end
 
