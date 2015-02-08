@@ -147,6 +147,18 @@ module Rugments
         new(opts).lex(raw)
       end
 
+      # This method should be overwritten in a particulur lexer subclass.
+      #
+      # Has to return a float between 0 and 1 that indicates
+      # if a lexer wants to highlight this text. Used by <tt>Lexer::guess</tt>.
+      # If this method returns 0 it won't highlight it in any case, if
+      # it returns 1 highlighting with this lexer is guaranteed.
+      #
+      # Doc stolen from pygments, see: http://bit.ly/1D9CbtA
+      def analyze_text(_src)
+        0
+      end
+
       def guess(mimetype: nil, filename: nil, source: nil)
         lexers = all
         total_size = lexers.size
