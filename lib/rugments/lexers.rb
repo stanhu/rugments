@@ -121,6 +121,8 @@ module Rugments
           Object.const_get(LEXERS_CACHE[tag][:class_name])
         else
           lexer = LEXERS_CACHE.select do |_k, hash|
+            # hash[:aliases] is nil for lexers without any alias.
+            # So let's check this as well.
             !hash[:aliases].nil? && hash[:aliases].include?(tag)
           end
 
