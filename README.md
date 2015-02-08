@@ -37,22 +37,14 @@ work.
 require 'rugments'
 
 source = File.read('/etc/bashrc')
-formatter = Rugments::Formatters::HTML.new(css_class: 'highlight')
+formatter = Rugments::Formatters::HTML.new(
+  linenos: 'table',
+  lineanchors: true,
+  anchorlinenos: true
+)
 lexer = Rugments::Lexer.find_by_name('bash')
-formatter.format(lexer.lex(source))
+puts formatter.render(lexer.lex(source))
 ```
-
-
-### Advantages to pygments.rb
-
-* No need to [spawn Python processes](https://github.com/tmm1/pygments.rb).
-
-
-### Advantages to CodeRay
-
-* The HTML output from Rouge is fully compatible with stylesheets designed for pygments.
-* The lexers are implemented with a dedicated DSL, rather than being hand-coded.
-* Rouge supports every language CodeRay does.
 
 
 ## You can even use it with Redcarpet
@@ -71,15 +63,3 @@ end
 
 If you have `:fenced_code_blocks` enabled, you can specify languages, and even
 options with CGI syntax, like `php?start_inline=1`, or `erb?parent=javascript`.
-
-
-## Encodings
-
-Rouge is only for UTF-8 strings. If you'd like to highlight a string with a
-different encoding, please convert it to UTF-8 first.
-
-
-## License
-
-Rouge is released under the MIT license. Please see the `LICENSE` file for more
-information.
