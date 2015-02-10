@@ -44,6 +44,8 @@ module Rugments
         }
       end
 
+      start { ruby.reset!; html.reset! }
+
       state :root do
         rule /\s*\n/, Text
         rule(/\s*/) { |m| token Text; indentation(m[0]) }
