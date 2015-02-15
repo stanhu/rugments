@@ -5,9 +5,9 @@
 * Initial fork from [rouge](https://github.com/jneen/rouge)
 * Huge code cleanup (linting with rubocop)
 * Replaced AUTHORS with a generated list from git. Provided a `.mailmap` file as well.
-* Use a cache for all the lexers. If you just want to use one lexer Rugments
-  does not have to load all the lexers. Use `Rugments::Lexer.find_by_name` to
-  get a lexer class.
+* Use a cache for all the lexers. Guessing lexers is up to twice as fast!
+  If you just want to use one lexer Rugments does not have to load all the lexers.
+  Use `Rugments::Lexer.find_by_name` to get a particular lexer class.
 * Ignore case when filtering lexers against filenames.
 * Provide continuous integration support using [travis](https://travis-ci.org/rumpelsepp/rugments)
   and [coveralls](https://coveralls.io/r/rumpelsepp/rugments).

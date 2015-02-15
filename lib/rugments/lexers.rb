@@ -162,24 +162,41 @@ module Rugments
       end
 
       def guess(mimetype: nil, filename: nil, source: nil)
-        lexers = all
+        lexers = LEXERS_CACHE
         total_size = lexers.size
 
         lexers = filter_by_mimetype(lexers, mimetype) if mimetype
-        return lexers.first if lexers.size == 1
+
+        if lexers.size == 1
+          lexer = lexers.first
+          k, v = lexer.first
+          require_relative v[:source_file]
+          return Object.const_get(v[:class_name])
+        end
 
         lexers = filter_by_filename(lexers, filename) if filename
-        return lexers.first if lexers.size == 1
+
+        if lexers.size == 1
+          lexer = lexers.first
+          # Unpack a hash, see: http://stackoverflow.com/a/12880856/2587286
+          k, v = lexer.first
+          require_relative v[:source_file]
+          return Object.const_get(v[:class_name])
+        end
 
         if source
           # If we're filtering against *all* lexers, we only use confident
           # return values from analyze_text. But if we've filtered down
           # already, we can trust the analysis more.
           source_threshold = lexers.size < total_size ? 0 : 0.5
-          return [best_by_source(lexers, source, source_threshold)].compact
+          lexers = [best_by_source(lexers, source, source_threshold)].compact!
         end
 
-        return Lexers::PlainText if lexers.empty?
+        if lexers.empty?
+          require_relative LEXERS_CACHE[:plaintext][:source_file]
+          return Object.const_get(LEXERS_CACHE[:plaintext][:class_name])
+        end
+
         lexers.first
       end
 
@@ -195,9 +212,38 @@ module Rugments
 
       private
 
+      # Gets a hash similar to Rugments::LEXERS_CACHE and returns a subset
+      # of this hash with matching mimetypes.
+      #
+      # Example hash:
+      #   lexers = {
+      #     c: {
+      #       class_name: 'Rugments::Lexers::C',
+      #       source_file: 'lexers/c.rb',
+      #       aliases: nil,
+      #       filenames: ['*.c', '*.h', '*.idc'],
+      #       mimetypes: ['text/x-chdr', 'text/x-csrc']
+      #     },
+      #     javascript: {
+      #       class_name: 'Rugments::Lexers::Javascript',
+      #       source_file: 'lexers/javascript.rb',
+      #       aliases: ['js', 'js'],
+      #       filenames: ['*.js', '*.js'],
+      #       mimetypes:[
+      #         'application/javascript',
+      #         'application/x-javascript',
+      #         'text/javascript',
+      #         'text/x-javascript',
+      #         'application/javascript',
+      #         'application/x-javascript',
+      #         'text/javascript',
+      #         'text/x-javascript'
+      #       ]
+      #     }
+      #   }
       def filter_by_mimetype(lexers, mimetype)
-        filtered = lexers.select do |lexer|
-          !lexer.mimetypes.nil? && lexer.mimetypes.include?(mimetype)
+        filtered = lexers.select do |k, v|
+          !v[:mimetypes].nil? && v[:mimetypes].include?(mimetype)
         end
 
         filtered.any? ? filtered : lexers
@@ -215,10 +261,10 @@ module Rugments
         # Match dotfiles and do not care about case sensitivity.
         glob_flags = File::FNM_DOTMATCH | File::FNM_CASEFOLD
 
-        lexers.select! { |lexer| !lexer.filenames.nil? }
+        lexers.select! { |k, v| !v[:filenames].nil? }
 
-        lexers.each do |lexer|
-          score = lexer.filenames.map do |pattern|
+        lexers.each do |k, v|
+          score = v[:filenames].map do |pattern|
             if File.fnmatch?(pattern, filename, glob_flags)
               # Specificity is better the fewer wildcards
               # there are; so a smaller score wins.
@@ -231,9 +277,9 @@ module Rugments
           # Again: Smaller score wins!
           if best_seen.nil? || score < best_seen
             best_seen = score
-            out = [lexer]
+            out = [{ k => v }]
           elsif score == best_seen
-            out << lexer
+            out << { k => v }
           end
         end
 
@@ -256,7 +302,13 @@ module Rugments
 
         best_result = threshold
         best_match = nil
-        lexers.each do |lexer|
+
+        lexers.each do |k, v|
+          # Now we have to actually require the lexers
+          # because we need to call `analyze_text`.
+          require_relative v[:source_file]
+          lexer = Object.const_get(v[:class_name])
+
           result = lexer.analyze_text(source) || 0
           return lexer if result == 1
 
