@@ -343,6 +343,11 @@ module Rugments
       # @debug = option(:debug)
     end
 
+    # Called after each lex is finished.
+    # The default implementation is a noop.
+    def reset!
+    end
+
     # Given a string, yield [token, chunk] pairs.  If no block is given,
     # an enumerator is returned.
     #

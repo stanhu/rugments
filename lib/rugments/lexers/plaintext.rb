@@ -9,14 +9,8 @@ module Rugments
       filenames '*.txt'
       mimetypes 'text/plain'
 
-      default_options token: 'Text'
-
-      def token
-        @token ||= Token[option :token]
-      end
-
-      def stream_tokens(string, &_b)
-        yield token, string
+      def stream_tokens(string)
+        yield Tokens::Text, string
       end
     end
   end
