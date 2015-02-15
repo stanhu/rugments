@@ -169,6 +169,7 @@ module Rugments
 
         if lexers.size == 1
           lexer = lexers.first
+          # Unpack a hash, see: http://stackoverflow.com/a/12880856/2587286
           k, v = lexer.first
           require_relative v[:source_file]
           return Object.const_get(v[:class_name])
