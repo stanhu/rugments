@@ -180,8 +180,7 @@ module Rugments
         end
 
         if lexers.empty?
-          require_relative LEXERS_CACHE[:plaintext][:source_file]
-          return Object.const_get(LEXERS_CACHE[:plaintext][:class_name])
+          require_lexer_from_cache(plaintext: LEXERS_CACHE[:plaintext])
         end
 
         lexers.first
