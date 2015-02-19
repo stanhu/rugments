@@ -166,24 +166,10 @@ module Rugments
         total_size = lexers.size
 
         lexers = filter_by_mimetype(lexers, mimetype) if mimetype
-
-        if lexers.size == 1
-          lexer = lexers.first
-          # Unpack a hash, see: http://stackoverflow.com/a/12880856/2587286
-          k, v = lexer.first
-          require_relative v[:source_file]
-          return Object.const_get(v[:class_name])
-        end
+        return require_lexer_from_cache(lexers.first) if lexers.size == 1
 
         lexers = filter_by_filename(lexers, filename) if filename
-
-        if lexers.size == 1
-          lexer = lexers.first
-          # Unpack a hash, see: http://stackoverflow.com/a/12880856/2587286
-          k, v = lexer.first
-          require_relative v[:source_file]
-          return Object.const_get(v[:class_name])
-        end
+        return require_lexer_from_cache(lexers.first) if lexers.size == 1
 
         if source
           # If we're filtering against *all* lexers, we only use confident
@@ -213,6 +199,15 @@ module Rugments
 
       private
 
+      # A little helper method which requires and returns a lexer
+      # class which is refered in LEXERS_CACHE. This method gets
+      # a hash with one key and its value from LEXERS_CACHE
+      def require_lexer_from_cache(h)
+        # Unpack a hash, see: http://stackoverflow.com/a/12880856/2587286
+        k, v = h.first
+        require_relative v[:source_file]
+        Object.const_get(v[:class_name])
+      end
       # Gets a hash similar to Rugments::LEXERS_CACHE and returns a subset
       # of this hash with matching mimetypes.
       #
