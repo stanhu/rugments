@@ -82,7 +82,7 @@ module Rugments
         @keywords ||= Set.new %w(
           for in while do break return continue switch case default
           if else throw try catch finally new delete typeof instanceof
-          void this
+          void this yield
         )
       end
 
