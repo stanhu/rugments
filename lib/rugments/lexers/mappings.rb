@@ -5,7 +5,81 @@
 # Do not alter LEXERS_CACHE manually!
 
 module Rugments
-  LEXERS_CACHE = {:java=>
+  LEXERS_CACHE = {:conf=>
+  {:class_name=>"Rugments::Lexers::Conf",
+   :source_file=>"lexers/conf.rb",
+   :aliases=>["config", "configuration"],
+   :filenames=>["*.conf", "*.config"],
+   :mimetypes=>nil},
+ :go=>
+  {:class_name=>"Rugments::Lexers::Go",
+   :source_file=>"lexers/go.rb",
+   :aliases=>["go", "golang"],
+   :filenames=>["*.go"],
+   :mimetypes=>["text/x-go", "application/x-go"]},
+ :apache=>
+  {:class_name=>"Rugments::Lexers::Apache",
+   :source_file=>"lexers/apache.rb",
+   :aliases=>nil,
+   :filenames=>[".htaccess", "httpd.conf"],
+   :mimetypes=>["text/x-httpd-conf", "text/x-apache-conf"]},
+ :plaintext=>
+  {:class_name=>"Rugments::Lexers::PlainText",
+   :source_file=>"lexers/plaintext.rb",
+   :aliases=>["text"],
+   :filenames=>["*.txt"],
+   :mimetypes=>["text/plain"]},
+ :c=>
+  {:class_name=>"Rugments::Lexers::C",
+   :source_file=>"lexers/c.rb",
+   :aliases=>nil,
+   :filenames=>["*.c", "*.h", "*.idc"],
+   :mimetypes=>["text/x-chdr", "text/x-csrc"]},
+ :clojure=>
+  {:class_name=>"Rugments::Lexers::Clojure",
+   :source_file=>"lexers/clojure.rb",
+   :aliases=>["clj", "cljs"],
+   :filenames=>["*.clj", "*.cljs"],
+   :mimetypes=>["text/x-clojure", "application/x-clojure"]},
+ :ruby=>
+  {:class_name=>"Rugments::Lexers::Ruby",
+   :source_file=>"lexers/ruby.rb",
+   :aliases=>["rb"],
+   :filenames=>
+    ["*.rb",
+     "*.ruby",
+     "*.rbw",
+     "*.rake",
+     "*.gemspec",
+     "*.podspec",
+     "Rakefile",
+     "Guardfile",
+     "Gemfile",
+     "Capfile",
+     "Podfile",
+     "Vagrantfile",
+     "*.ru",
+     "*.prawn"],
+   :mimetypes=>["text/x-ruby", "application/x-ruby"]},
+ :diff=>
+  {:class_name=>"Rugments::Lexers::Diff",
+   :source_file=>"lexers/diff.rb",
+   :aliases=>["patch", "udiff"],
+   :filenames=>["*.diff", "*.patch"],
+   :mimetypes=>["text/x-diff", "text/x-patch"]},
+ :slim=>
+  {:class_name=>"Rugments::Lexers::Slim",
+   :source_file=>"lexers/slim.rb",
+   :aliases=>nil,
+   :filenames=>["*.slim"],
+   :mimetypes=>nil},
+ :objective_c=>
+  {:class_name=>"Rugments::Lexers::ObjectiveC",
+   :source_file=>"lexers/objective_c.rb",
+   :aliases=>["objc"],
+   :filenames=>["*.m", "*.h"],
+   :mimetypes=>["text/x-objective_c", "application/x-objective_c"]},
+ :java=>
   {:class_name=>"Rugments::Lexers::Java",
    :source_file=>"lexers/java.rb",
    :aliases=>nil,
@@ -17,12 +91,6 @@ module Rugments
    :aliases=>["m"],
    :filenames=>["*.m"],
    :mimetypes=>["text/x-matlab", "application/x-matlab"]},
- :c=>
-  {:class_name=>"Rugments::Lexers::C",
-   :source_file=>"lexers/c.rb",
-   :aliases=>nil,
-   :filenames=>["*.c", "*.h", "*.idc"],
-   :mimetypes=>["text/x-chdr", "text/x-csrc"]},
  :javascript=>
   {:class_name=>"Rugments::Lexers::Javascript",
    :source_file=>"lexers/javascript.rb",
@@ -58,12 +126,6 @@ module Rugments
      ".profile",
      "PKGBUILD"],
    :mimetypes=>["application/x-sh", "application/x-shellscript"]},
- :conf=>
-  {:class_name=>"Rugments::Lexers::Conf",
-   :source_file=>"lexers/conf.rb",
-   :aliases=>["config", "configuration"],
-   :filenames=>["*.conf", "*.config"],
-   :mimetypes=>nil},
  :nginx=>
   {:class_name=>"Rugments::Lexers::Nginx",
    :source_file=>"lexers/nginx.rb",
@@ -106,12 +168,6 @@ module Rugments
    :aliases=>nil,
    :filenames=>["*.toml"],
    :mimetypes=>["text/x-toml"]},
- :objective_c=>
-  {:class_name=>"Rugments::Lexers::ObjectiveC",
-   :source_file=>"lexers/objective_c.rb",
-   :aliases=>["objc"],
-   :filenames=>["*.m", "*.h"],
-   :mimetypes=>["text/x-objective_c", "application/x-objective_c"]},
  :r=>
   {:class_name=>"Rugments::Lexers::R",
    :source_file=>"lexers/r.rb",
@@ -123,12 +179,6 @@ module Rugments
      "text/x-R",
      "text/x-r",
      "application/x-r"]},
- :applescript=>
-  {:class_name=>"Rugments::Lexers::AppleScript",
-   :source_file=>"lexers/applescript.rb",
-   :aliases=>["applescript"],
-   :filenames=>["*.applescript", "*.scpt"],
-   :mimetypes=>["application/x-applescript"]},
  :tcl=>
   {:class_name=>"Rugments::Lexers::TCL",
    :source_file=>"lexers/tcl.rb",
@@ -158,12 +208,6 @@ module Rugments
    :aliases=>nil,
    :filenames=>["*.lua", "*.wlua"],
    :mimetypes=>["text/x-lua", "application/x-lua"]},
- :slim=>
-  {:class_name=>"Rugments::Lexers::Slim",
-   :source_file=>"lexers/slim.rb",
-   :aliases=>nil,
-   :filenames=>["*.slim"],
-   :mimetypes=>nil},
  :python=>
   {:class_name=>"Rugments::Lexers::Python",
    :source_file=>"lexers/python.rb",
@@ -231,12 +275,6 @@ module Rugments
    :aliases=>["lithaskell", "lhaskell", "lhs"],
    :filenames=>["*.lhs"],
    :mimetypes=>["text/x-literate-haskell"]},
- :liquid=>
-  {:class_name=>"Rugments::Lexers::Liquid",
-   :source_file=>"lexers/liquid.rb",
-   :aliases=>nil,
-   :filenames=>["*.liquid"],
-   :mimetypes=>nil},
  :ini=>
   {:class_name=>"Rugments::Lexers::INI",
    :source_file=>"lexers/ini.rb",
@@ -249,16 +287,10 @@ module Rugments
    :aliases=>["pp"],
    :filenames=>["*.pp"],
    :mimetypes=>nil},
- :apache=>
-  {:class_name=>"Rugments::Lexers::Apache",
-   :source_file=>"lexers/apache.rb",
-   :aliases=>nil,
-   :filenames=>[".htaccess", "httpd.conf"],
-   :mimetypes=>["text/x-httpd-conf", "text/x-apache-conf"]},
  :elixir=>
   {:class_name=>"Rugments::Lexers::Elixir",
    :source_file=>"lexers/elixir.rb",
-   :aliases=>nil,
+   :aliases=>["exs"],
    :filenames=>["*.ex", "*.exs"],
    :mimetypes=>["text/x-elixir", "application/x-elixir"]},
  :factor=>
@@ -285,12 +317,6 @@ module Rugments
    :aliases=>["visualbasic"],
    :filenames=>["*.vbs"],
    :mimetypes=>["text/x-visualbasic", "application/x-visualbasic"]},
- :diff=>
-  {:class_name=>"Rugments::Lexers::Diff",
-   :source_file=>"lexers/diff.rb",
-   :aliases=>["patch", "udiff"],
-   :filenames=>["*.diff", "*.patch"],
-   :mimetypes=>["text/x-diff", "text/x-patch"]},
  :gherkin=>
   {:class_name=>"Rugments::Lexers::Gherkin",
    :source_file=>"lexers/gherkin.rb",
@@ -315,12 +341,6 @@ module Rugments
    :aliases=>["yml"],
    :filenames=>["*.yaml", "*.yml"],
    :mimetypes=>["text/x-yaml"]},
- :php=>
-  {:class_name=>"Rugments::Lexers::PHP",
-   :source_file=>"lexers/php.rb",
-   :aliases=>["php", "php3", "php4", "php5"],
-   :filenames=>["*.php", "*.php[345]"],
-   :mimetypes=>["text/x-php"]},
  :erlang=>
   {:class_name=>"Rugments::Lexers::Erlang",
    :source_file=>"lexers/erlang.rb",
@@ -363,12 +383,6 @@ module Rugments
    :aliases=>["rs"],
    :filenames=>["*.rs", "*.rc"],
    :mimetypes=>["text/x-rust"]},
- :plaintext=>
-  {:class_name=>"Rugments::Lexers::PlainText",
-   :source_file=>"lexers/plaintext.rb",
-   :aliases=>["text"],
-   :filenames=>["*.txt"],
-   :mimetypes=>["text/plain"]},
  :sml=>
   {:class_name=>"Rugments::Lexers::SML",
    :source_file=>"lexers/sml.rb",
@@ -393,32 +407,6 @@ module Rugments
    :aliases=>["hbs", "mustache"],
    :filenames=>["*.handlebars", "*.hbs", "*.mustache"],
    :mimetypes=>["text/x-handlebars", "text/x-mustache"]},
- :ruby=>
-  {:class_name=>"Rugments::Lexers::Ruby",
-   :source_file=>"lexers/ruby.rb",
-   :aliases=>["rb"],
-   :filenames=>
-    ["*.rb",
-     "*.ruby",
-     "*.rbw",
-     "*.rake",
-     "*.gemspec",
-     "*.podspec",
-     "Rakefile",
-     "Guardfile",
-     "Gemfile",
-     "Capfile",
-     "Podfile",
-     "Vagrantfile",
-     "*.ru",
-     "*.prawn"],
-   :mimetypes=>["text/x-ruby", "application/x-ruby"]},
- :go=>
-  {:class_name=>"Rugments::Lexers::Go",
-   :source_file=>"lexers/go.rb",
-   :aliases=>["go", "golang"],
-   :filenames=>["*.go"],
-   :mimetypes=>["text/x-go", "application/x-go"]},
  :viml=>
   {:class_name=>"Rugments::Lexers::VimL",
    :source_file=>"lexers/viml.rb",
@@ -445,12 +433,6 @@ module Rugments
    :aliases=>["cl", "common-lisp"],
    :filenames=>["*.cl", "*.lisp", "*.el"],
    :mimetypes=>["text/x-common-lisp"]},
- :clojure=>
-  {:class_name=>"Rugments::Lexers::Clojure",
-   :source_file=>"lexers/clojure.rb",
-   :aliases=>["clj", "cljs"],
-   :filenames=>["*.clj", "*.cljs"],
-   :mimetypes=>["text/x-clojure", "application/x-clojure"]},
  :sed=>
   {:class_name=>"Rugments::Lexers::Sed",
    :source_file=>"lexers/sed.rb",
@@ -463,12 +445,6 @@ module Rugments
    :aliases=>["st", "squeak"],
    :filenames=>["*.st"],
    :mimetypes=>["text/x-smalltalk"]},
- :json=>
-  {:class_name=>"Rugments::Lexers::JSON",
-   :source_file=>"lexers/json.rb",
-   :aliases=>nil,
-   :filenames=>["*.json"],
-   :mimetypes=>["application/json"]},
  :haskell=>
   {:class_name=>"Rugments::Lexers::Haskell",
    :source_file=>"lexers/haskell.rb",
@@ -486,5 +462,29 @@ module Rugments
    :source_file=>"lexers/sass.rb",
    :aliases=>nil,
    :filenames=>["*.sass"],
-   :mimetypes=>["text/x-sass"]}}
+   :mimetypes=>["text/x-sass"]},
+ :applescript=>
+  {:class_name=>"Rugments::Lexers::AppleScript",
+   :source_file=>"lexers/applescript.rb",
+   :aliases=>["applescript"],
+   :filenames=>["*.applescript", "*.scpt"],
+   :mimetypes=>["application/x-applescript"]},
+ :json=>
+  {:class_name=>"Rugments::Lexers::JSON",
+   :source_file=>"lexers/json.rb",
+   :aliases=>nil,
+   :filenames=>["*.json"],
+   :mimetypes=>["application/json"]},
+ :liquid=>
+  {:class_name=>"Rugments::Lexers::Liquid",
+   :source_file=>"lexers/liquid.rb",
+   :aliases=>nil,
+   :filenames=>["*.liquid"],
+   :mimetypes=>nil},
+ :php=>
+  {:class_name=>"Rugments::Lexers::PHP",
+   :source_file=>"lexers/php.rb",
+   :aliases=>["php", "php3", "php4", "php5"],
+   :filenames=>["*.php", "*.php[345]"],
+   :mimetypes=>["text/x-php"]}}
 end
