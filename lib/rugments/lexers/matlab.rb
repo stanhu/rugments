@@ -57,7 +57,13 @@ module Rugments
         rule /\d+L/, Num::Integer::Long
         rule /\d+/, Num::Integer
 
-        rule /'(?=(.*'))/, Str::Single, :string # should be: rule /(?<![\]\)\w\.])'/i, Str::Single, :string
+        # TODO should probably be:
+        # rule /(?<![\]\)\w\.])'/i, Str::Single, :string
+        # unfortunately look-behind assertion do not work
+        # This rule leads to false recognition of strings
+        # when using something like c = a' + b'; but all other
+        # cases should be working
+        rule /'(?=(.*'))/, Str::Single, :string
         rule /'/, Operator
       end
 
