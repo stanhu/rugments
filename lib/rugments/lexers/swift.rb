@@ -24,7 +24,7 @@ module Rugments
       )
 
       attributes = Set.new %w(
-        autoclosure IBAction IBDesignable IBInspectable IBOutlet noreturn NSCopying NSManaged objc UIApplicationMain NSApplicationMain objc_block
+        autoclosure IBAction IBDesignable IBInspectable IBOutlet noreturn NSCopying NSManaged objc UIApplicationMain NSApplicationMain objc_block noescape
       )
 
       constants = Set.new %w(
@@ -73,6 +73,8 @@ module Rugments
         rule /(@objc[(])([^)]+)([)])/ do
           groups Keyword::Declaration, Name::Class, Keyword::Declaration
         end
+
+        rule /@autoclosure\(escaping\)/, Keyword::Declaration
 
         rule /@(#{id})/ do |m|
           if attributes.include? m[1]
