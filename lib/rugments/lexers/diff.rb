@@ -13,26 +13,21 @@ module Rugments
         return 1   if text.start_with?('Index: ')
         return 1   if text.start_with?('diff ')
 
+        # TODO: Have a look at pygments here, seems better
         return 0.9 if text =~ /\A---.*?\n\+\+\+/m
       end
 
-      state :header do
-        rule /^diff .*?\n(?=---|\+\+\+)/m, Generic::Heading
-        rule /^--- .*?\n/, Generic::Deleted
-        rule /^\+\+\+ .*?\n/, Generic::Inserted
-      end
-
-      state :diff do
-        rule /@@ -\d+,\d+ \+\d+,\d+ @@.*?\n/, Generic::Heading
-        rule /^\+.*?\n/, Generic::Inserted
-        rule /^-.*?\n/,  Generic::Deleted
-        rule /^ .*?\n/,  Text
-        rule /^.*?\n/,   Error
-      end
-
       state :root do
-        mixin :header
-        mixin :diff
+        rule(/^ .*\n/, Text)
+        rule(/^\+.*\n/, Generic::Inserted)
+        # Do not highlight the delimiter line
+        # before the diffstat in email patches.
+        rule(/^-+ .*\n/, Generic::Deleted)
+        rule(/^!.*\n/, Generic::Strong)
+        rule(/^@.*\n/, Generic::Subheading)
+        rule(/^([Ii]ndex|diff).*\n/, Generic::Heading)
+        rule(/^=.*\n/, Generic::Heading)
+        rule(/.*\n/, Text)
       end
     end
   end
