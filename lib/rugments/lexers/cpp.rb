@@ -12,7 +12,8 @@ module Rugments
       filenames '*.cpp', '*.hpp',
                 '*.c++', '*.h++',
                 '*.cc',  '*.hh',
-                '*.cxx', '*.hxx'
+                '*.cxx', '*.hxx',
+                '*.pde', '*.ino'
       mimetypes 'text/x-c++hdr', 'text/x-c++src'
 
       def self.keywords
