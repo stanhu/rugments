@@ -1,8 +1,8 @@
 Changelog
 =========
 
-## Rugments 1.0.0 (2015-XX-XX)
-------------------------------
+Rugments 1.0.0 (2015-XX-XX)
+---------------------------
 
 * Initial fork from rouge_
 * Huge code cleanup (linting with rubocop)
