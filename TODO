@@ -10,3 +10,6 @@ Doc:
     ☐ Find out how to deal with a proper changelog (github releases, markdown file, blogpost, …)
     ☐ Subclassed lexers MUST require the super class.
     ☐ Minimum Ruby is 2.0
+
+Misc:
+    ☐ Have a look at those fenced code blocks with CGI options.
