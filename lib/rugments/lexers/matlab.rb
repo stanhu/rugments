@@ -57,7 +57,7 @@ module Rugments
         rule /\d+L/, Num::Integer::Long
         rule /\d+/, Num::Integer
 
-        # TODO should probably be:
+        # TODO: should probably be:
         # rule /(?<![\]\)\w\.])'/i, Str::Single, :string
         # unfortunately look-behind assertion do not work
         # This rule leads to false recognition of strings
