@@ -11,8 +11,8 @@ maintain Rugments as my own fork to improve the overall code quality. It can
 highlight over 60 languages, and output e.g. HTML or ANSI 256-color text. Its
 HTML output is compatible with stylesheets designed for [pygments][]. Further information is available at:
 
-* http://www.rubydoc.info/github/rumpelsepp/rugments
 * http://rugments.readthedocs.org/en/latest/
+* http://www.rubydoc.info/github/rumpelsepp/rugments
 
 [Rouge]: https://github.com/jneen/rouge
 [pygments]: http://pygments.org/
