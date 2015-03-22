@@ -130,9 +130,9 @@ module Rugments
         MAX_DISTANCE = 257 * 257 * 3
 
         def self.closest_color(r, g, b)
-          @@colors_cache ||= {}
+          @colors_cache ||= {}
           key = (r << 16) + (g << 8) + b
-          @@colors_cache.fetch(key) do
+          @colors_cache.fetch(key) do
             distance = MAX_DISTANCE
 
             match = 0
