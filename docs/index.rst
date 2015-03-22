@@ -35,3 +35,4 @@ is compatible with stylesheets designed for pygments_.
    writing_lexers
    roadmap
    changelog
+   authors
