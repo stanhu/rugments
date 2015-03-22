@@ -23,6 +23,10 @@ task build: [:clean, :spec] do
   sh 'gem build rouge.gemspec'
 end
 
+task :am, [:pr_id] do |t, args|
+  sh "curl -L \"https://github.com/rumpelsepp/rugments/pull/#{args[:pr_id]}.patch\" | git am"
+end
+
 task default: :test
 
 # Load rake tasks from tasks subdirectory.
