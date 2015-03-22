@@ -164,15 +164,12 @@ module Rugments
         lexers = LEXERS_CACHE
         total_size = lexers.size
 
-        # TODO: Move to guess_for_mimetype
         lexers = filter_by_mimetype(lexers, mimetype) if mimetype
         return require_lexer_from_cache(lexers.first) if lexers.size == 1
 
-        # TODO: Move to guess_for_filename
         lexers = filter_by_filename(lexers, filename) if filename
         return require_lexer_from_cache(lexers.first) if lexers.size == 1
 
-        # TODO: Move to guess_for source
         if source
           # If we're filtering against *all* lexers, we only use confident
           # return values from analyze_text. But if we've filtered down
