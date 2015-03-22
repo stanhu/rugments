@@ -23,10 +23,12 @@ task :authors do
     f.puts '* Daniel Koch <koch@triple6.org>'
     f.puts
     f.puts
-    f.puts 'Pygments AUTHORS'
+    f.puts 'Pygments authors'
     f.puts '----------------'
     f.puts
     f.puts 'A full list of contributors can be found here:'
     f.puts 'http://pygments.org/docs/authors/'
+    f.puts
+    f.puts 'Many thanks for all contributions!'
   end
 end

@@ -1,5 +1,5 @@
-Qickstart
-=========
+Quickstart
+==========
 
 .. code-block:: ruby
 
@@ -15,8 +15,8 @@ Qickstart
     puts formatter.render(lexer.lex(source))
 
 
-You can even use it with Redcarpet
-----------------------------------
+Redcarpet Integration
+---------------------
 
 .. code-block:: ruby
 

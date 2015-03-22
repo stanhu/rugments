@@ -1,9 +1,6 @@
 API Documentation
 =================
 
-Aut be available at http://rubydoc.info/. Unfortunately currently the build with
-yard fails...
-
 Using the lexer DSL
 -------------------
 
