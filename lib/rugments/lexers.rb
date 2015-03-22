@@ -103,8 +103,7 @@ module Rugments
       # files.
       def all
         lexers = LEXERS_CACHE.keys.map do |tag|
-          require_relative LEXERS_CACHE[tag][:source_file]
-          Object.const_get(LEXERS_CACHE[tag][:class_name])
+          require_lexer_from_cache(tag => LEXERS_CACHE[tag])
         end
 
         lexers
@@ -117,8 +116,7 @@ module Rugments
         tag = tag.to_sym
 
         if LEXERS_CACHE.key?(tag)
-          require_relative LEXERS_CACHE[tag][:source_file]
-          Object.const_get(LEXERS_CACHE[tag][:class_name])
+          require_lexer_from_cache(tag => LEXERS_CACHE[tag])
         else
           lexer = LEXERS_CACHE.select do |_k, hash|
             # hash[:aliases] is nil for lexers without any alias.
@@ -306,8 +304,7 @@ module Rugments
         lexers.each do |k, v|
           # Now we have to actually require the lexers
           # because we need to call `analyze_text`.
-          require_relative v[:source_file]
-          lexer = Object.const_get(v[:class_name])
+          lexer = require_lexer_from_cache(k => v)
 
           result = lexer.analyze_text(source) || 0
           return lexer if result == 1
