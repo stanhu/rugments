@@ -9,7 +9,7 @@ Doc:
     ☐ Update Readme
     ☐ Find out how to deal with a proper changelog (github releases, markdown file, blogpost, …)
     ☐ Subclassed lexers MUST require the super class.
-    ☐ Minimum Ruby is 2.0
+    ✔ Minimum Ruby is 2.0 @done(2015-03-24 08:56) @project(Doc)
 
 Misc:
     ☐ Have a look at those fenced code blocks with CGI options.
