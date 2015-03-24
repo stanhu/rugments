@@ -31,6 +31,7 @@ import os
 # ones.
 extensions = [
     'sphinx.ext.todo',
+    'sphinx.ext.extlinks',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -265,3 +266,10 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+
+# Extensions
+extlinks = {'issue': ('https://github.com/rumpelsepp/rugments/issues/%s',
+                      '#'),
+            'commit': ('https://github.com/rumpelsepp/rugments/commit/%s', ''),
+            'compare': ('https://github.com/rumpelsepp/rugments/compare/%s', '')}
